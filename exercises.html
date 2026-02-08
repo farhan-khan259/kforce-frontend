@@ -4,7 +4,843 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>1-Day Full Body Program</title>
-    <link rel="stylesheet" href="./exercises.css" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --primary-orange: #ff6b35;
+        --dark-bg: #0d0d0d;
+        --card-bg: #1a1a1a;
+        --info-bar-bg: #3d2817;
+        --text-light: #ffffff;
+        --text-muted: #999999;
+        --border-color: #333333;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: var(--dark-bg);
+        color: var(--text-light);
+        line-height: 1.6;
+      }
+
+      /* Header Styles */
+      .header {
+        background-color: var(--dark-bg);
+        border-bottom: 1px solid var(--border-color);
+        padding: 15px 0;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      .header-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-weight: bold;
+        font-size: 20px;
+        letter-spacing: 1px;
+        color: var(--text-light);
+      }
+
+      .logo span {
+        color: #f60;
+      }
+
+      .nav {
+        display: flex;
+        gap: 30px;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+      }
+
+      .nav span {
+        font-size: 18px;
+        color: grey;
+        margin-right: 5px;
+      }
+
+      .nav a {
+        text-decoration: none;
+        color: grey;
+        font-size: 16px;
+        transition: color 0.3s ease;
+      }
+
+      .nav a:hover {
+        color: #ffffff;
+      }
+
+      .nav span:hover {
+        color: #ffffff;
+      }
+
+      /* Hero Section */
+      .hero {
+        text-align: center;
+        padding: 60px 20px;
+        background-color: var(--dark-bg);
+      }
+
+      .hero-title {
+        font-size: 3.7rem;
+        font-weight: 700;
+        text-align: center;
+        margin-block: 20px;
+        line-height: 1.1;
+        letter-spacing: 1px;
+      }
+
+      .highlight-orange {
+        color: #eb4300;
+        display: block;
+      }
+
+      .hero-subtitle {
+        font-size: 1.3rem;
+        color: var(--text-muted);
+        max-width: 745px;
+        margin: 0 auto;
+        line-height: 1.6;
+      }
+
+      /* Workouts Section */
+      .workouts {
+        padding: 60px 20px;
+        display: flex;
+        background-color: var(--dark-bg);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 30px;
+      }
+
+      .workouts-container {
+        max-width: 900px;
+        margin: 0 auto;
+      }
+
+      .section-label {
+        font-size: 12px;
+        letter-spacing: 2px;
+        color: var(--primary-orange);
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+
+      .section-title {
+        font-size: 3.5rem;
+        font-weight: 700;
+        margin-bottom: 50px;
+        letter-spacing: 1px;
+        color: var(--text-light);
+      }
+
+      /* Footer */
+      .footer {
+        border-top: 1px solid var(--border-color);
+        padding: 25px 20px;
+        text-align: center;
+        background-color: var(--dark-bg);
+      }
+
+      .footer p {
+        color: var(--text-muted);
+        font-size: 0.85rem;
+      }
+
+      .badge {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+
+        padding: 8px 18px;
+        border-radius: 999px;
+
+        font-size: 17px;
+        font-weight: 600;
+
+        color: #ea580c;
+        background: #27170c;
+      }
+
+      /* 🔴 Pulsing dot */
+      .dot {
+        width: 8px;
+        height: 8px;
+        background: #ea580c;
+        border-radius: 50%;
+        position: relative;
+      }
+
+      .dot::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        background: #ea580c;
+        animation: pulse 1.6s ease-out infinite;
+      }
+
+      /* ✨ Text shimmer (subtle like video) */
+      .badge-text {
+        background: linear-gradient(90deg, #ea580c, #fb923c, #ea580c);
+        background-size: 200% auto;
+
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+
+        animation: shimmer 3s linear infinite;
+      }
+
+      /* 🔁 Animations */
+      @keyframes glowMove {
+        0% {
+          background-position: 0% 50%;
+        }
+
+        100% {
+          background-position: 300% 50%;
+        }
+      }
+
+      @keyframes glowPulse {
+        0%,
+        100% {
+          box-shadow:
+            0 0 20px rgba(234, 88, 12, 0.35),
+            0 0 40px rgba(234, 88, 12, 0.25);
+        }
+
+        50% {
+          box-shadow:
+            0 0 28px rgba(234, 88, 12, 0.55),
+            0 0 60px rgba(234, 88, 12, 0.4);
+        }
+      }
+
+      @keyframes shimmer {
+        0% {
+          background-position: 0% center;
+        }
+
+        100% {
+          background-position: 200% center;
+        }
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+          opacity: 0.6;
+        }
+
+        100% {
+          transform: scale(2.6);
+          opacity: 0;
+        }
+      }
+
+      .gradient-line {
+        width: 100%;
+        height: 2px;
+
+        background: linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0) 0%,
+          rgba(234, 88, 12, 0.5) 50%,
+          rgba(255, 255, 255, 0) 100%
+        );
+
+        opacity: 0.6;
+      }
+
+      .badge2 {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+
+        padding: 8px 18px;
+        border-radius: 999px;
+
+        font-size: 17px;
+        font-weight: 600;
+
+        color: #ea580c;
+        background: #27170c;
+      }
+
+      /* Card */
+      .exercise-card {
+        max-width: 880px;
+        margin-top: 30px !important;
+        margin: auto;
+        background: #141414;
+        border-radius: 14px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      /* Video */
+      .video-wrapper {
+        position: relative;
+        background: #000;
+      }
+
+      .video-wrapper video {
+        width: 100%;
+        display: block;
+      }
+
+      /* Step badge */
+      .step-badge {
+        position: absolute;
+        top: 14px;
+        left: 14px;
+        width: 34px;
+        height: 34px;
+        background: #ff6a00;
+        color: #000;
+        font-weight: 800;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        font-size: 14px;
+        z-index: 2;
+      }
+
+      /* Content */
+      .exercise-content {
+        padding: 22px 26px 26px;
+      }
+
+      /* Title */
+      .exercise-title {
+        font-size: 1.2rem;
+        letter-spacing: 1px;
+        margin-bottom: 14px;
+      }
+
+      /* Sets box */
+      .sets-box {
+        display: inline-block;
+        padding: 10px 14px;
+        background: linear-gradient(
+          90deg,
+          rgba(255, 106, 0, 0.25),
+          rgba(255, 106, 0, 0.1)
+        );
+        border-radius: 6px;
+        width: 100%;
+        color: #ff6a00;
+        font-weight: 700;
+        font-size: 0.95rem;
+        margin-bottom: 14px;
+      }
+
+      /* Meta text */
+      .meta p {
+        font-size: 0.85rem;
+        color: rgba(255, 255, 255, 0.75);
+        margin-bottom: 6px;
+        line-height: 1.6;
+      }
+
+      .meta span {
+        color: rgba(255, 255, 255, 0.9);
+        font-weight: 600;
+      }
+
+      /* Description */
+      .description {
+        margin-top: 14px;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.65);
+        line-height: 1.7;
+      }
+
+      .video-boxdesc {
+        border: 1px solid #292929;
+        background: #191919;
+        padding: 5px;
+        border-radius: 8px;
+      }
+
+      /* Hover glow + border */
+      .exercise-card:hover {
+        border: 1px solid #ff6a00;
+        box-shadow:
+          0 0 0 1px rgba(255, 106, 0, 0.4),
+          0 0 25px rgba(255, 106, 0, 0.35),
+          0 0 60px rgba(255, 106, 0, 0.15);
+        transition:
+          border-color 0.35s ease,
+          box-shadow 0.35s ease,
+          transform 0.35s ease;
+      }
+
+      /* Title color change */
+      .exercise-card:hover .exercise-title {
+        color: #ff6a00;
+      }
+
+      /* ============================================
+   RESPONSIVE DESIGN - EXERCISE PROGRAM PAGE
+   ============================================ */
+
+      /* Large Desktop (1400px and up) */
+      @media (min-width: 1400px) {
+        .header-container,
+        .workouts-container {
+          max-width: 1300px;
+        }
+
+        .exercise-card {
+          max-width: 1000px;
+        }
+      }
+
+      /* Desktop (1024px to 1399px) */
+      @media (min-width: 1024px) and (max-width: 1399px) {
+        .hero-title {
+          font-size: 3.2rem;
+        }
+
+        .section-title {
+          font-size: 2.8rem;
+        }
+
+        .exercise-content {
+          padding: 20px 24px 24px;
+        }
+      }
+
+      /* Tablet Landscape (768px to 1023px) */
+      @media (min-width: 768px) and (max-width: 1023px) {
+        .hero {
+          padding: 40px 20px;
+        }
+
+        .hero-title {
+          font-size: 2.8rem;
+        }
+
+        .hero-subtitle {
+          font-size: 1.2rem;
+          padding: 0 20px;
+        }
+
+        .section-title {
+          font-size: 2.4rem;
+          margin-bottom: 40px;
+        }
+
+        .workouts {
+          padding: 40px 20px;
+        }
+
+        .exercise-card {
+          max-width: 95%;
+        }
+
+        .nav {
+          gap: 20px;
+        }
+      }
+
+      /* Tablet Portrait (600px to 767px) */
+      @media (min-width: 600px) and (max-width: 767px) {
+        .hero-title {
+          font-size: 2.4rem;
+        }
+
+        .hero-subtitle {
+          font-size: 1.1rem;
+        }
+
+        .section-title {
+          font-size: 2rem;
+          margin-bottom: 30px;
+        }
+
+        .badge,
+        .badge2 {
+          font-size: 0.9rem;
+          padding: 6px 12px;
+        }
+
+        .exercise-content {
+          padding: 18px 20px 22px;
+        }
+
+        .exercise-title {
+          font-size: 1.1rem;
+        }
+
+        .sets-box {
+          font-size: 0.9rem;
+          padding: 8px 12px;
+        }
+
+        .meta p {
+          font-size: 0.8rem;
+        }
+
+        .description {
+          font-size: 0.85rem;
+        }
+      }
+
+      /* Mobile (below 600px) */
+      @media (max-width: 599px) {
+        /* Header */
+        .header {
+          padding: 12px 0;
+        }
+
+        .header-container {
+          padding: 0 15px;
+          gap: 15px;
+        }
+
+        .logo {
+          font-size: 18px;
+        }
+
+        .nav {
+          gap: 15px;
+        }
+
+        .nav a {
+          font-size: 14px;
+        }
+
+        /* Hero Section */
+        .hero {
+          padding: 30px 15px;
+        }
+
+        .hero-title {
+          font-size: 1.8rem;
+          margin-block: 15px;
+          line-height: 1.2;
+        }
+
+        .highlight-orange {
+          display: inline;
+        }
+
+        .hero-subtitle {
+          font-size: 1rem;
+          line-height: 1.5;
+        }
+
+        .badge {
+          font-size: 0.8rem;
+          padding: 6px 10px;
+          gap: 0.4rem;
+        }
+
+        /* Workouts Section */
+        .workouts {
+          padding: 30px 15px;
+          margin-top: 20px;
+        }
+
+        .section-title {
+          font-size: 1.6rem;
+          margin-bottom: 25px;
+          text-align: center;
+        }
+
+        .badge2 {
+          font-size: 0.8rem;
+          padding: 6px 12px;
+          margin-bottom: 15px;
+        }
+
+        /* Exercise Cards */
+        .exercise-card {
+          max-width: 100%;
+          margin-top: 20px !important;
+          border-radius: 10px;
+        }
+
+        .step-badge {
+          width: 28px;
+          height: 28px;
+          font-size: 12px;
+          top: 10px;
+          left: 10px;
+        }
+
+        .exercise-content {
+          padding: 16px 18px 20px;
+        }
+
+        .exercise-title {
+          font-size: 1rem;
+          margin-bottom: 12px;
+        }
+
+        .sets-box {
+          font-size: 0.85rem;
+          padding: 8px 12px;
+          margin-bottom: 12px;
+        }
+
+        .meta p {
+          font-size: 0.75rem;
+          margin-bottom: 5px;
+          line-height: 1.5;
+        }
+
+        .video-boxdesc {
+          padding: 8px;
+          font-size: 0.75rem;
+        }
+
+        .description {
+          font-size: 0.8rem;
+          margin-top: 12px;
+        }
+
+        /* Footer */
+        .footer {
+          padding: 20px 15px;
+        }
+
+        .footer p {
+          font-size: 0.75rem;
+        }
+      }
+
+      /* Extra Small Mobile (below 400px) */
+      @media (max-width: 399px) {
+        .hero-title {
+          font-size: 1.6rem;
+        }
+
+        .section-title {
+          font-size: 1.4rem;
+        }
+
+        .nav {
+          flex-direction: column;
+          gap: 8px;
+        }
+
+        .nav a {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .badge,
+        .badge2 {
+          font-size: 0.7rem;
+        }
+
+        .exercise-content {
+          padding: 14px 16px 18px;
+        }
+
+        .exercise-title {
+          font-size: 0.95rem;
+        }
+
+        .meta p {
+          font-size: 0.7rem;
+        }
+      }
+
+      /* Video Responsiveness */
+      .video-wrapper {
+        position: relative;
+        background: #000;
+        overflow: hidden;
+      }
+
+      .video-wrapper video {
+        width: 100%;
+        height: auto;
+        display: block;
+        aspect-ratio: 16/9;
+        /* Maintain video aspect ratio */
+      }
+
+      /* Adjust video controls for mobile */
+      @media (max-width: 767px) {
+        .video-wrapper video {
+          height: auto;
+          min-height: 200px;
+        }
+      }
+
+      /* Improve touch targets on mobile */
+      @media (max-width: 767px) {
+        .sets-box,
+        .video-boxdesc {
+          min-height: 44px;
+          /* Minimum touch target size */
+          display: flex;
+          align-items: center;
+        }
+
+        .nav a {
+          padding: 8px 12px;
+          min-height: 44px;
+        }
+      }
+
+      /* Prevent horizontal overflow */
+      @media (max-width: 767px) {
+        html,
+        body {
+          overflow-x: hidden;
+          width: 100%;
+        }
+
+        .container {
+          padding: 0 15px;
+        }
+
+        .exercise-card {
+          width: 100%;
+          max-width: 100%;
+        }
+      }
+
+      /* Typography adjustments for better mobile readability */
+      @media (max-width: 767px) {
+        body {
+          font-size: 15px;
+          line-height: 1.5;
+        }
+
+        h1,
+        h2,
+        h3 {
+          line-height: 1.2;
+        }
+
+        .hero-subtitle br {
+          display: none;
+          /* Remove line breaks on mobile for better flow */
+        }
+      }
+
+      /* Smooth transitions for mobile interactions */
+      @media (max-width: 767px) {
+        .exercise-card {
+          transition:
+            transform 0.2s ease,
+            box-shadow 0.2s ease;
+        }
+
+        .exercise-card:active {
+          transform: scale(0.99);
+        }
+      }
+
+      /* Form input improvements for iOS */
+      @media (max-width: 767px) {
+        input,
+        textarea,
+        select {
+          font-size: 16px;
+          /* Prevents zoom on iOS */
+        }
+      }
+
+      /* Adjust animations for mobile performance */
+      @media (max-width: 767px) {
+        .dot::after {
+          animation: pulse 2s ease-out infinite;
+        }
+
+        .badge-text {
+          animation: shimmer 4s linear infinite;
+        }
+      }
+
+      /* Fix for very tall screens */
+      @media (min-height: 800px) and (max-width: 767px) {
+        .hero {
+          padding: 50px 15px;
+        }
+
+        .workouts {
+          padding: 40px 15px;
+        }
+      }
+
+      /* Landscape orientation fixes */
+      @media (max-height: 500px) and (orientation: landscape) {
+        .hero {
+          padding: 20px 15px;
+        }
+
+        .workouts {
+          padding: 20px 15px;
+        }
+
+        .hero-title {
+          font-size: 1.8rem;
+          margin-block: 10px;
+        }
+
+        .exercise-card {
+          margin-top: 15px !important;
+        }
+      }
+
+      /* Print styles */
+      @media print {
+        .header,
+        .footer,
+        .nav,
+        .badge,
+        .badge2,
+        .video-wrapper {
+          display: none;
+        }
+
+        .exercise-card {
+          break-inside: avoid;
+          border: 1px solid #ccc;
+          box-shadow: none;
+        }
+
+        body {
+          background: white;
+          color: black;
+          font-size: 12pt;
+        }
+
+        .exercise-content {
+          padding: 10px;
+        }
+
+        .hero,
+        .workouts {
+          padding: 20px 0;
+        }
+      }
+    </style>
   </head>
   <body>
     <!-- Header -->
