@@ -25,7 +25,7 @@ const heroForm = document.getElementById('heroForm');
 const ctaForm = document.getElementById('ctaForm');
 
 // Your Node.js backend URL - UPDATE THIS WITH YOUR ACTUAL BACKEND URL
-const BACKEND_URL = 'http://localhost:3000'; // Change to your actual backend URL when deployed
+const BACKEND_URL = 'https://kforce-backend.onrender.com'; // Change to your actual backend URL when deployed
 
 if (heroForm) {
     heroForm.addEventListener('submit', (e) => {
